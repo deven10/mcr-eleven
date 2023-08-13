@@ -8,10 +8,19 @@ export const Homepage = () => {
   const navigate = useNavigate();
   const { moviesList, removeFromWatchList, addToWatchList, searchText } =
     useContext(ContextMovies);
-  console.log(moviesList);
 
+  console.log(moviesList);
   const listOfGenre = moviesList.map((movie) => movie.genre);
-  console.log("genre list : ", listOfGenre);
+
+  const uniqueGenres = new Set();
+
+  listOfGenre.forEach((item) => {
+    item.forEach((genre) => {
+      uniqueGenres.add(genre);
+    });
+  });
+
+  const GenreArray = Array.from(uniqueGenres);
 
   const [selectedRating, setSelectedRating] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -21,11 +30,14 @@ export const Homepage = () => {
     if (searchText === "") {
       return dataset;
     } else {
-      const temp = moviesList.filter(
+      const temp = moviesList?.filter(
         (movie) =>
-          movie.title.toLowerCase().includes(searchText.toLowerCase()) ||
-          movie.director.toLowerCase().includes(searchText.toLowerCase()) ||
-          movie.cast.toString().toLowerCase().includes(searchText.toLowerCase())
+          movie?.title?.toLowerCase().includes(searchText.toLowerCase()) ||
+          movie?.director?.toLowerCase().includes(searchText.toLowerCase()) ||
+          movie?.cast
+            ?.toString()
+            .toLowerCase()
+            .includes(searchText.toLowerCase())
       );
 
       return temp;
@@ -33,7 +45,13 @@ export const Homepage = () => {
   };
 
   const filterByGenre = (dataset) => {
-    return dataset;
+    if (selectedGenre === "") {
+      return dataset;
+    } else {
+      return dataset.filter(({ genre }) =>
+        genre.toString().toLowerCase().includes(selectedGenre)
+      );
+    }
   };
   const filterByYear = (dataset) => {
     if (selectedYear === "") {
@@ -65,7 +83,14 @@ export const Homepage = () => {
           className="select"
           name="genre"
           id="genre"
-        ></select>
+        >
+          <option value="">All Genre</option>
+          {GenreArray.map((genre, index) => (
+            <option value={genre.toLowerCase()} key={index}>
+              {genre}
+            </option>
+          ))}
+        </select>
         <select
           className="select"
           name="release-year"
@@ -73,7 +98,7 @@ export const Homepage = () => {
           onChange={(e) => setSelectedYear(e.target.value)}
           id="release-year"
         >
-          <option value="">Select a Year</option>
+          <option value="">All Year</option>
           {Array.from({ length: 2024 - 1990 }, (_, index) => (
             <option key={1990 + index} value={1990 + index}>
               {1990 + index}
@@ -87,7 +112,7 @@ export const Homepage = () => {
           name="rating"
           id="rating"
         >
-          <option value="">Select a Rating</option>
+          <option value="">All Rating</option>
           <option value="10">10 Rating</option>
           <option value="9">9 Rating</option>
           <option value="8">8 Rating</option>

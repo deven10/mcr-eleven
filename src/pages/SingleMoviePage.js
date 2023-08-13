@@ -23,7 +23,12 @@ export const SingleMoviePage = () => {
         <p>Rating: {singleMovie?.rating}</p>
         <p>Director: {singleMovie?.director}</p>
         <p>Writer: {singleMovie?.writer}</p>
-        <p>Cast: {singleMovie?.cast.map((cast) => cast)}</p>
+        <p className="cast-p">
+          Cast:{" "}
+          {singleMovie?.cast.map((cast) => (
+            <span> {cast}</span>
+          ))}
+        </p>
         {singleMovie.isWatchList ? (
           <button
             onClick={() => removeFromWatchList(singleMovie.id)}

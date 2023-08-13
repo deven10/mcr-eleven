@@ -203,3 +203,11 @@
   font-size: 16px;
   margin: 0px 0px 8px 0px;
 }
+
+.cast-p span::after{
+  content: ', ';
+}
+
+.cast-p span:last-child::after{
+ content: ' ';
+}
