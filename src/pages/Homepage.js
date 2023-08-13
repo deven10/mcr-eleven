@@ -9,7 +9,6 @@ export const Homepage = () => {
   const { moviesList, removeFromWatchList, addToWatchList, searchText } =
     useContext(ContextMovies);
 
-  console.log(moviesList);
   const listOfGenre = moviesList.map((movie) => movie.genre);
 
   const uniqueGenres = new Set();

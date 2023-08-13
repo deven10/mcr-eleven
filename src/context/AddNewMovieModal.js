@@ -67,7 +67,6 @@ export const AddNewMovieModal = () => {
     ) {
       alert("Please fill all the Fields");
     } else {
-      console.log("movieDetails: ", movieDetails);
       addNewMovie(movieDetails);
       clear();
       handleClose();
