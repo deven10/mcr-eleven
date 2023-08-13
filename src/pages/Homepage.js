@@ -42,7 +42,6 @@ export const Homepage = () => {
       return temp;
     }
   };
-
   const filterByGenre = (dataset) => {
     if (selectedGenre === "") {
       return dataset;

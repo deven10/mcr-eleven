@@ -19,7 +19,12 @@ export const SingleMoviePage = () => {
         <h2>{singleMovie?.title}</h2>
         <p>{singleMovie?.summary}</p>
         <p>Year: {singleMovie?.year}</p>
-        <p>Genre: {singleMovie?.genre.map((genre) => genre)}</p>
+        <p className="cast-p">
+          Genre:{" "}
+          {singleMovie?.genre.map((genre) => (
+            <span> {genre}</span>
+          ))}
+        </p>
         <p>Rating: {singleMovie?.rating}</p>
         <p>Director: {singleMovie?.director}</p>
         <p>Writer: {singleMovie?.writer}</p>
