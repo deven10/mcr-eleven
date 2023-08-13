@@ -53,8 +53,11 @@ export const AddNewMovieModal = () => {
       id: +moviesList.length + 1,
       title: "",
       year: "",
-      genre: [],
+      genre: "",
       rating: "",
+      writer: "",
+      director: "",
+      cast: "",
       summary: "",
       imageURL: "",
     });
